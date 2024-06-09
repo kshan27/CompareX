@@ -42,7 +42,7 @@ export default function Home() {
     ]
 
     return (
-        <div className="flex w-screen">
+        <div className="flex w-screen bg-heading-bg">
             <nav 
                 className={`bg-dark-grey h-screen p-5 pt-8 w-1/10 hover:w-1/4 duration-200 relative`}
                 onMouseOver={() => setOpen(true)}
