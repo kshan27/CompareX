@@ -1,22 +1,32 @@
 import { Table, TableBody, TableRow, TableCell } from "@/components/ui/table"
+import { getFilteredComparisions } from '@/lib/compareFuns';
 
-export default function ComparisionLayout() {
+export default function ComparisionLayout({title, comparisions, searchTerm}) {
+
+    const filteredComps = getFilteredComparisions(comparisions, searchTerm);
+    
     return (
-        <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12">
+        <div className="relative flex flex-col justify-start rounded-sm overflow-hidden bg-white-color p-6 sm:py-10 mb-5">
             <section>
-            <h2 className="text-xl font-semibold mb-4">August comparison</h2>
+            <h2 className="text-xl font-semibold mb-4">{title}</h2>
             <Table>
                 <TableBody>
-                  {Array.from({ length: 10 }).map((_, index) => (
+                  {filteredComps && Array.from(filteredComps).map((row, index) => (
                     <TableRow key={index}>
                       <TableCell className="w-[10%]">
                         <span className="text-green-500 text-xs"> New </span>
                       </TableCell>
                       <TableCell className="w-[90%]">
-                        Product A offers Advanced AI-driven automation, while B prioritizes intuitive user interfaces.
+                        {row}
                       </TableCell>
                     </TableRow>
                   ))}
+                  {!filteredComps && <TableRow> 
+                    <TableCell className="w-[100%]">
+                        <strong> No comparisions found for selected products in current month. </strong>
+                    </TableCell>
+                  </TableRow>
+                  }
                 </TableBody>
               </Table>
               </section>
